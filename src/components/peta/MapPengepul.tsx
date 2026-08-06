@@ -35,20 +35,20 @@ function FitBoundsToMarkers({ data }: { data: PengepulData[] }) {
   return null;
 }
 
-// Marker foto yang lebih rapi
+// Marker foto dengan hover effect
 const createCustomIcon = (fotoUrl: string) => {
   return L.divIcon({
     className: "custom-marker",
     html: `
       <div style="
-        width: 50px;
-        height: 50px;
+        width: 52px;
+        height: 52px;
         border-radius: 50%;
         border: 3px solid white;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        box-shadow: 0 3px 12px rgba(0,0,0,0.35);
         overflow: hidden;
         background: white;
-        transition: transform 0.2s;
+        transition: transform 0.2s ease;
       " onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
         <img 
           src="${fotoUrl}" 
@@ -58,9 +58,9 @@ const createCustomIcon = (fotoUrl: string) => {
         />
       </div>
     `,
-    iconSize: [50, 50],
-    iconAnchor: [25, 25],
-    popupAnchor: [0, -25],
+    iconSize: [52, 52],
+    iconAnchor: [26, 26],
+    popupAnchor: [0, -26],
   });
 };
 
@@ -104,7 +104,7 @@ export default function MapPengepul() {
 
   useEffect(() => {
     async function fetchPengepul() {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("pengepul")
         .select("*")
         .order("rt", { ascending: true });
@@ -144,6 +144,33 @@ export default function MapPengepul() {
 
   return (
     <div className="w-full h-[calc(100vh-100px)] rounded-2xl overflow-hidden shadow-xl border border-gray-200 relative">
+      {/* Custom CSS untuk popup */}
+      <style jsx global>{`
+        .leaflet-popup-content-wrapper {
+          border-radius: 16px !important;
+          padding: 0 !important;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+          overflow: hidden !important;
+        }
+        .leaflet-popup-content {
+          margin: 0 !important;
+          min-width: 320px !important;
+        }
+        .leaflet-popup-tip {
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+        }
+        .leaflet-container a.leaflet-popup-close-button {
+          color: #6b7280 !important;
+          padding: 12px 12px 0 0 !important;
+          font-size: 20px !important;
+          font-weight: 300 !important;
+          z-index: 10;
+        }
+        .leaflet-container a.leaflet-popup-close-button:hover {
+          color: #111827 !important;
+        }
+      `}</style>
+
       <MapContainer
         center={[-6.7750, 108.3520]}
         zoom={16}
@@ -179,67 +206,78 @@ export default function MapPengepul() {
             position={[p.koordinat.lat, p.koordinat.lng]}
             icon={createCustomIcon(p.foto.depan)}
           >
-            <Popup maxWidth={260} minWidth={220} className="custom-popup">
-              <div className="font-sans">
-                {/* Foto dengan badge RT */}
-                <div className="relative w-full h-32 -mx-4 -mt-3 mb-3 overflow-hidden rounded-t-lg">
+            <Popup>
+              <div className="flex gap-3 p-3">
+                {/* Foto Kiri */}
+                <div className="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden bg-gray-100">
                   <Image
                     src={p.foto.depan}
                     alt={p.nama}
                     fill
-                    sizes="260px"
+                    sizes="96px"
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                  <div className="absolute top-2 left-2 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-sm">
-                    <span className="text-xs font-bold text-emerald-700">
+                  <div className="absolute top-1 left-1 bg-white/95 backdrop-blur-sm px-1.5 py-0.5 rounded-md shadow-sm">
+                    <span className="text-[10px] font-bold text-emerald-700">
                       RT {p.rt.toString().padStart(2, "0")}
                     </span>
                   </div>
                 </div>
 
-                {/* Konten */}
-                <div className="px-1 pb-1">
-                  <h3 className="text-base font-bold text-gray-900 mb-1 leading-tight">
+                {/* Info Kanan */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg font-bold text-gray-900 mb-0.5 leading-tight">
                     {p.nama}
                   </h3>
-                  <p className="text-xs text-gray-500 mb-2.5 leading-relaxed line-clamp-2">
-                    {p.alamat}
-                  </p>
-
-                  {/* Produk */}
-                  <div className="flex flex-wrap gap-1 mb-2.5">
-                    {p.produk?.slice(0, 2).map((prod, idx) => (
-                      <span
-                        key={idx}
-                        className="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-medium border border-emerald-100"
-                      >
-                        {prod}
-                      </span>
-                    ))}
+                  <div className="flex items-center gap-1 text-xs text-gray-500 mb-2">
+                    <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span className="truncate">RT {p.rt.toString().padStart(2, "0")}, Desa Leuwilaja</span>
                   </div>
+
+                  {/* Produk Badge */}
+                  {p.produk && p.produk.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mb-2">
+                      {p.produk.slice(0, 2).map((prod, idx) => (
+                        <span
+                          key={idx}
+                          className="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-md font-medium border border-emerald-100"
+                        >
+                          {prod}
+                        </span>
+                      ))}
+                    </div>
+                  )}
 
                   {/* Harga */}
                   {p.harga && p.harga !== "-" && (
-                    <p className="text-sm font-bold text-emerald-700 mb-3">
+                    <p className="text-sm font-bold text-emerald-700 mb-2">
                       {p.harga}
                     </p>
                   )}
 
                   {/* Tombol */}
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 mt-1">
                     <Link
                       href={`/pengepul/${p.slug}`}
-                      className="flex-1 text-center bg-emerald-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-emerald-700 transition-colors shadow-sm"
+                      className="flex-1 flex items-center justify-center gap-1 text-xs font-semibold text-gray-700 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
                     >
                       Detail
+                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
                     </Link>
                     <a
                       href={`https://www.google.com/maps/dir/?api=1&destination=${p.koordinat.lat},${p.koordinat.lng}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 text-center bg-blue-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+                      className="flex-1 flex items-center justify-center gap-1 text-xs font-semibold text-white bg-emerald-600 py-2 rounded-lg hover:bg-emerald-700 transition-colors shadow-sm"
                     >
+                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
                       Navigasi
                     </a>
                   </div>
@@ -264,22 +302,6 @@ export default function MapPengepul() {
             <span className="text-gray-700 font-medium">Batas Desa</span>
           </div>
         </div>
-      </div>
-
-      {/* Zoom Control Custom */}
-      <div className="absolute bottom-6 right-4 z-[1000] flex flex-col gap-1">
-        <button
-          onClick={() => {}}
-          className="w-9 h-9 bg-white rounded-lg shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 font-bold text-lg border border-gray-200"
-        >
-          +
-        </button>
-        <button
-          onClick={() => {}}
-          className="w-9 h-9 bg-white rounded-lg shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 font-bold text-lg border border-gray-200"
-        >
-          −
-        </button>
       </div>
     </div>
   );

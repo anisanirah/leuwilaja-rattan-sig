@@ -10,7 +10,7 @@ export const pengepul: Pengepul[] = [
   {
     id: 1,
     slug: "jengki",  // ← Folder di RT 01 adalah "jengki"
-    nama: "Bapak Jengki",
+    nama: "Jengki",
     rt: 1,
     alamat: "RT 01, Desa Leuwilaja",
     deskripsi:
@@ -27,7 +27,7 @@ export const pengepul: Pengepul[] = [
   {
     id: 2,
     slug: "engkos",  // ← Folder di RT 02 adalah "engkos"
-    nama: "Bapak Engkos",
+    nama: "Engkos",
     rt: 2,
     alamat: "Blok Jumat, RT 02/RW 01, Desa Leuwilaja",
     deskripsi:
@@ -44,7 +44,7 @@ export const pengepul: Pengepul[] = [
   {
     id: 3,
     slug: "endang",
-    nama: "Bapak Endang Suhendang",
+    nama: "Endang Suhendang",
     rt: 3,
     alamat: "Blok Jumat, RT 03/RW 01, Desa Leuwilaja",
     deskripsi:
@@ -65,7 +65,7 @@ export const pengepul: Pengepul[] = [
     rt: 4,
     alamat: "Blok Senin, RT 04/RW 02, Desa Leuwilaja",
     deskripsi:
-      "Usaha milik Eme Atma telah berjalan sejak tahun 2010 dan berlokasi di Blok Senin, RT 04/RW 02. Produksi difokuskan pada berbagai jenis keranjang rotan dengan kisaran harga Rp20.000 hingga Rp70.000, tergantung ukuran produk. Saat ini usaha tersebut didukung sekitar 20 orang pekerja.",
+      "Usaha milik Bapak Eme Atma telah berjalan sejak tahun 2010 dan berlokasi di Blok Senin, RT 04/RW 02. Produksi difokuskan pada berbagai jenis keranjang rotan dengan kisaran harga Rp20.000 hingga Rp70.000, tergantung ukuran produk. Saat ini usaha tersebut didukung sekitar 20 orang pekerja.",
     produk: ["Keranjang Rotan", "Keranjang Serbaguna"],
     harga: "Rp 20.000 – Rp 70.000",
     telepon: "-",
@@ -82,7 +82,7 @@ export const pengepul: Pengepul[] = [
     rt: 4,
     alamat: "Blok Senin, RT 04/RW 02, Desa Leuwilaja",
     deskripsi:
-      "Usaha milik Lili berada di Blok Senin, RT 04/RW 02 dan telah berdiri sejak sekitar tahun 1987. Pada awalnya usaha ini memproduksi keranjang, kursi, dan meja rotan, namun saat ini lebih banyak berfokus pada produksi keranjang karena jumlah pengrajin yang semakin terbatas. Produk dipasarkan dengan kisaran harga Rp20.000–Rp21.000 sesuai ukuran dan didukung sekitar 50 orang pekerja.",
+      "Usaha milik Bapak Lili berada di Blok Senin, RT 04/RW 02 dan telah berdiri sejak sekitar tahun 1987. Pada awalnya usaha ini memproduksi keranjang, kursi, dan meja rotan, namun saat ini lebih banyak berfokus pada produksi keranjang karena jumlah pengrajin yang semakin terbatas. Produk dipasarkan dengan kisaran harga Rp20.000–Rp21.000 sesuai ukuran dan didukung sekitar 50 orang pekerja.",
     produk: ["Keranjang Rotan", "Kursi Rotan", "Meja Rotan"],
     harga: "Rp 20.000 – Rp 21.000",
     telepon: "-",
@@ -99,7 +99,7 @@ export const pengepul: Pengepul[] = [
     rt: 4,
     alamat: "RT 04, Desa Leuwilaja",
     deskripsi:
-      "Usaha milik H. Eman (Suherman) telah berdiri sejak tahun 1992 dan memproduksi berbagai jenis basket rotan serta keranjang rotan. Harga produk disesuaikan dengan ukuran yang dipesan dan proses produksi melibatkan sekitar 7 orang pekerja.",
+      "Usaha milik Bapak H. Eman (Suherman) telah berdiri sejak tahun 1992 dan memproduksi berbagai jenis basket rotan serta keranjang rotan. Harga produk disesuaikan dengan ukuran yang dipesan dan proses produksi melibatkan sekitar 7 orang pekerja.",
     produk: ["Basket Rotan", "Keranjang Rotan"],
     harga: "Disesuaikan dengan ukuran",
     telepon: "-",
@@ -116,7 +116,7 @@ export const pengepul: Pengepul[] = [
     rt: 4,
     alamat: "Blok Senin Tagog, RT 04, Desa Leuwilaja",
     deskripsi:
-      "Usaha milik Subana berlokasi di Blok Senin Tagog, RT 04. Produksi utamanya berupa keranjang rotan dengan kisaran harga Rp21.000–Rp25.000. Saat ini usaha tersebut didukung sekitar 25 orang pekerja.",
+      "Usaha milik Bapak Subana berlokasi di Blok Senin Tagog, RT 04. Produksi utamanya berupa keranjang rotan dengan kisaran harga Rp21.000–Rp25.000. Saat ini usaha tersebut didukung sekitar 25 orang pekerja.",
     produk: ["Keranjang Rotan"],
     harga: "Rp 21.000 – Rp 25.000",
     telepon: "-",
@@ -133,7 +133,7 @@ export const pengepul: Pengepul[] = [
     rt: 5,
     alamat: "RT 05, Desa Leuwilaja",
     deskripsi:
-      "Usaha milik Ayud telah berjalan selama kurang lebih 30–32 tahun. Produksi berfokus pada pembuatan keranjang rotan yang dipasarkan dengan harga sekitar Rp20.000–Rp25.000 per buah. Proses produksi melibatkan sekitar 6 orang pekerja.",
+      "Usaha milik Bapak Ayud telah berjalan selama kurang lebih 30–32 tahun. Produksi berfokus pada pembuatan keranjang rotan yang dipasarkan dengan harga sekitar Rp20.000–Rp25.000 per buah. Proses produksi melibatkan sekitar 6 orang pekerja.",
     produk: ["Keranjang Rotan"],
     harga: "Rp 20.000 – Rp 25.000",
     telepon: "-",
@@ -167,7 +167,7 @@ export const pengepul: Pengepul[] = [
     rt: 8,
     alamat: "RT 08, Desa Leuwilaja",
     deskripsi:
-      "Usaha milik H. Sudanto beroperasi sejak tahun 2017 dan bekerja sama dengan satu pabrik menggunakan sistem Purchase Order (PO). Produk hanya diproduksi berdasarkan pesanan pabrik dengan jadwal pengiriman rutin setiap hari Jumat. Produk unggulan berupa keranjang sepeda yang telah dipasarkan hingga luar negeri. Selain itu juga memproduksi berbagai jenis keranjang piknik, potato, dan pot bunga.",
+      "Usaha milik Bapak H. Sudanto beroperasi sejak tahun 2017 dan bekerja sama dengan satu pabrik menggunakan sistem Purchase Order (PO). Produk hanya diproduksi berdasarkan pesanan pabrik dengan jadwal pengiriman rutin setiap hari Jumat. Produk unggulan berupa keranjang sepeda yang telah dipasarkan hingga luar negeri. Selain itu juga memproduksi berbagai jenis keranjang piknik, potato, dan pot bunga.",
     produk: ["Keranjang Sepeda", "Keranjang Piknik", "Potato", "Pot Bunga", "Keranjang Rotan"],
     harga: "-",
     telepon: "-",
@@ -184,7 +184,7 @@ export const pengepul: Pengepul[] = [
     rt: 8,
     alamat: "RT 08, Desa Leuwilaja",
     deskripsi:
-      "Usaha milik Asmad telah berjalan selama lebih dari 20 tahun. Produksi dilakukan berdasarkan pesanan dari wilayah Cirebon dan bekerja sama dengan satu perusahaan. Salah satu produk yang dihasilkan adalah ember anyaman rotan dengan berbagai ukuran. Harga produk berkisar mulai Rp7.500 hingga Rp30.000 dan didukung sekitar 7 orang pekerja.",
+      "Usaha milik Bapak Asmad telah berjalan selama lebih dari 20 tahun. Produksi dilakukan berdasarkan pesanan dari wilayah Cirebon dan bekerja sama dengan satu perusahaan. Salah satu produk yang dihasilkan adalah ember anyaman rotan dengan berbagai ukuran. Harga produk berkisar mulai Rp7.500 hingga Rp30.000 dan didukung sekitar 7 orang pekerja.",
     produk: ["Ember Anyaman Rotan"],
     harga: "Rp 7.500 – Rp 30.000",
     telepon: "-",
@@ -201,7 +201,7 @@ export const pengepul: Pengepul[] = [
     rt: 9,
     alamat: "RT 09, Desa Leuwilaja",
     deskripsi:
-      "Usaha milik Asmar telah berjalan selama kurang lebih 15 tahun.",
+      "Usaha milik Bapak Asmar telah berjalan selama kurang lebih 15 tahun.",
     produk: ["Produk Kerajinan Rotan"],
     harga: "-",
     telepon: "-",
@@ -218,7 +218,7 @@ export const pengepul: Pengepul[] = [
     rt: 9,
     alamat: "Dekat SD, RT 09, Desa Leuwilaja",
     deskripsi:
-      "Usaha milik Johar telah berjalan sekitar 25 tahun dan berlokasi di sekitar SD wilayah RT 09. Produk dipasarkan dengan kisaran harga Rp40.000–Rp69.000 dan melibatkan lebih dari 100 pengrajin.",
+      "Usaha milik Bapak Johar telah berjalan sekitar 25 tahun dan berlokasi di sekitar SD wilayah RT 09. Produk dipasarkan dengan kisaran harga Rp40.000–Rp69.000 dan melibatkan lebih dari 100 pengrajin.",
     produk: ["Produk Kerajinan Rotan"],
     harga: "Rp 40.000 – Rp 69.000",
     telepon: "-",
@@ -235,7 +235,7 @@ export const pengepul: Pengepul[] = [
     rt: 9,
     alamat: "RT 09, Desa Leuwilaja",
     deskripsi:
-      "Usaha milik Pepen telah berjalan selama sekitar 35 tahun dan berfokus pada produksi keranjang rotan untuk kebutuhan ekspor. Tahap finishing dilakukan di pabrik, sedangkan bahan baku rotan didatangkan dari Kalimantan. Harga produk berkisar antara Rp30.000 hingga Rp500.000 dengan dukungan sekitar 10 orang pekerja.",
+      "Usaha milik Bapak Pepen telah berjalan selama sekitar 35 tahun dan berfokus pada produksi keranjang rotan untuk kebutuhan ekspor. Tahap finishing dilakukan di pabrik, sedangkan bahan baku rotan didatangkan dari Kalimantan. Harga produk berkisar antara Rp30.000 hingga Rp500.000 dengan dukungan sekitar 10 orang pekerja.",
     produk: ["Keranjang Rotan Ekspor"],
     harga: "Rp 30.000 – Rp 500.000",
     telepon: "-",
@@ -252,7 +252,7 @@ export const pengepul: Pengepul[] = [
     rt: 10,
     alamat: "Blok Minggu, RT 10/RW 04, Desa Leuwilaja",
     deskripsi:
-      "Usaha milik H. Emon Suherman merupakan salah satu usaha rotan berskala besar di Desa Leuwilaja yang telah berjalan sekitar 15 tahun. Berlokasi di Blok Minggu, RT 10/RW 04, usaha ini memproduksi berbagai jenis kerajinan rotan dengan jumlah pekerja lebih dari 100 orang. Produk unggulannya adalah Biholma, selain itu juga memproduksi Drey, Trumis, Ester, Tok Ning, Ban, Setebel, Laci, dan Kursi dengan kisaran harga mulai Rp22.000 hingga Rp142.000.",
+      "Usaha milik Bapak H. Emon Suherman merupakan salah satu usaha rotan berskala besar di Desa Leuwilaja yang telah berjalan sekitar 15 tahun. Berlokasi di Blok Minggu, RT 10/RW 04, usaha ini memproduksi berbagai jenis kerajinan rotan dengan jumlah pekerja lebih dari 100 orang. Produk unggulannya adalah Biholma, selain itu juga memproduksi Drey, Trumis, Ester, Tok Ning, Ban, Setebel, Laci, dan Kursi dengan kisaran harga mulai Rp22.000 hingga Rp142.000.",
     produk: ["Biholma", "Drey", "Trumis", "Ester", "Tok Ning", "Ban", "Setebel", "Laci", "Kursi Rotan"],
     harga: "Rp 22.000 – Rp 142.000",
     telepon: "-",
@@ -269,7 +269,7 @@ export const pengepul: Pengepul[] = [
     rt: 11,
     alamat: "Blok Kemis, RT 11/RW 05, Desa Leuwilaja",
     deskripsi:
-      "Gudang kedua milik H. Emon Suherman berlokasi di Blok Kemis, RT 11/RW 05 dan memiliki aktivitas produksi yang sama dengan Gudang 1. Berbagai jenis produk rotan diproduksi untuk memenuhi kebutuhan pasar dengan dukungan lebih dari 100 pekerja.",
+      "Gudang kedua milik Bapak H. Emon Suherman berlokasi di Blok Kemis, RT 11/RW 05 dan memiliki aktivitas produksi yang sama dengan Gudang 1. Berbagai jenis produk rotan diproduksi untuk memenuhi kebutuhan pasar dengan dukungan lebih dari 100 pekerja.",
     produk: ["Biholma", "Drey", "Trumis", "Ester", "Tok Ning", "Ban", "Setebel", "Laci", "Kursi Rotan"],
     harga: "Rp 22.000 – Rp 142.000",
     telepon: "-",
@@ -303,7 +303,7 @@ export const pengepul: Pengepul[] = [
     rt: 13,
     alamat: "RT 13, Desa Leuwilaja",
     deskripsi:
-      "Usaha milik Asep Priyanto menghasilkan berbagai produk kerajinan rotan mulai dari keranjang, laci, hingga souvenir custom. Produk unggulannya adalah laci penyimpanan dengan kisaran harga mulai Rp7.000 hingga Rp350.000. Proses produksi didukung sekitar 20 orang pekerja.",
+      "Usaha milik Bapak Asep Priyanto menghasilkan berbagai produk kerajinan rotan mulai dari keranjang, laci, hingga souvenir custom. Produk unggulannya adalah laci penyimpanan dengan kisaran harga mulai Rp7.000 hingga Rp350.000. Proses produksi didukung sekitar 20 orang pekerja.",
     produk: ["Keranjang Rotan", "Laci Penyimpanan", "Souvenir Custom"],
     harga: "Rp 7.000 – Rp 350.000",
     telepon: "-",

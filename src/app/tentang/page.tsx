@@ -149,7 +149,6 @@ export default function TentangPage() {
                 </svg>
               </div>
               <h3 className="text-2xl font-bold text-[#2F2F2F] mb-4">Misi</h3>
-                <h3 className="text-2xl font-bold text-[#2F2F2F] mb-4">Misi</h3>
                 <ul className="space-y-3 text-gray-600">
                   <li className="flex items-start">
                     <span className="w-2 h-2 bg-[#6B8F71] rounded-full mt-2 mr-3 flex-shrink-0"></span>

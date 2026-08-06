@@ -35,7 +35,6 @@ function FitBoundsToMarkers({ data }: { data: PengepulData[] }) {
   return null;
 }
 
-// Marker foto dengan hover effect
 const createCustomIcon = (fotoUrl: string) => {
   return L.divIcon({
     className: "custom-marker",
@@ -144,30 +143,50 @@ export default function MapPengepul() {
 
   return (
     <div className="w-full h-[calc(100vh-100px)] rounded-2xl overflow-hidden shadow-xl border border-gray-200 relative">
-      {/* Custom CSS untuk popup */}
+      {/* Custom CSS untuk popup Leaflet */}
       <style jsx global>{`
         .leaflet-popup-content-wrapper {
           border-radius: 16px !important;
           padding: 0 !important;
           box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
-          overflow: hidden !important;
+          overflow: visible !important;
         }
         .leaflet-popup-content {
           margin: 0 !important;
           min-width: 320px !important;
+          max-width: 360px !important;
         }
         .leaflet-popup-tip {
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
         }
         .leaflet-container a.leaflet-popup-close-button {
+          position: absolute !important;
+          top: 8px !important;
+          right: 8px !important;
+          width: 28px !important;
+          height: 28px !important;
+          background: white !important;
+          border-radius: 50% !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
           color: #6b7280 !important;
-          padding: 12px 12px 0 0 !important;
-          font-size: 20px !important;
-          font-weight: 300 !important;
-          z-index: 10;
+          font-size: 18px !important;
+          font-weight: 400 !important;
+          padding: 0 !important;
+          line-height: 28px !important;
+          text-align: center !important;
+          z-index: 1000 !important;
+          transition: all 0.2s !important;
         }
         .leaflet-container a.leaflet-popup-close-button:hover {
+          background: #f3f4f6 !important;
           color: #111827 !important;
+          transform: scale(1.1);
+        }
+        .leaflet-popup {
+          z-index: 900 !important;
         }
       `}</style>
 
@@ -207,7 +226,7 @@ export default function MapPengepul() {
             icon={createCustomIcon(p.foto.depan)}
           >
             <Popup>
-              <div className="flex gap-3 p-3">
+              <div className="flex gap-3 p-4 pt-5">
                 {/* Foto Kiri */}
                 <div className="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden bg-gray-100">
                   <Image
@@ -253,7 +272,7 @@ export default function MapPengepul() {
 
                   {/* Harga */}
                   {p.harga && p.harga !== "-" && (
-                    <p className="text-sm font-bold text-emerald-700 mb-2">
+                    <p className="text-sm font-bold text-emerald-700 mb-3">
                       {p.harga}
                     </p>
                   )}
@@ -273,7 +292,7 @@ export default function MapPengepul() {
                       href={`https://www.google.com/maps/dir/?api=1&destination=${p.koordinat.lat},${p.koordinat.lng}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-1 text-xs font-semibold text-white bg-emerald-600 py-2 rounded-lg hover:bg-emerald-700 transition-colors shadow-sm"
+                      className="flex-1 flex items-center justify-center gap-1 text-xs font-semibold text-emerald-700 bg-white py-2 rounded-lg border border-emerald-200 hover:bg-emerald-50 transition-colors"
                     >
                       <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />

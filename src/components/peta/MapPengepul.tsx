@@ -29,118 +29,68 @@ function FitBoundsToMarkers({ data }: { data: PengepulData[] }) {
       const bounds = L.latLngBounds(
         data.map((p) => [p.koordinat.lat, p.koordinat.lng])
       );
-      map.fitBounds(bounds, { padding: [80, 80], maxZoom: 16 });
+      map.fitBounds(bounds, { padding: [60, 60], maxZoom: 16 });
     }
   }, [map, data]);
   return null;
 }
 
+// Marker foto yang lebih rapi
 const createCustomIcon = (fotoUrl: string) => {
   return L.divIcon({
     className: "custom-marker",
     html: `
       <div style="
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
         border: 3px solid white;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.3);
         overflow: hidden;
         background: white;
-      ">
+        transition: transform 0.2s;
+      " onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
         <img 
           src="${fotoUrl}" 
           alt="Foto" 
           style="width:100%;height:100%;object-fit:cover;"
-          onerror="this.parentElement.style.background='linear-gradient(135deg, #6B8F71, #4E6B53)'"
+          onerror="this.parentElement.style.background='linear-gradient(135deg, #059669, #047857)'"
         />
       </div>
     `,
-    iconSize: [45, 45],
-    iconAnchor: [22, 22],
-    popupAnchor: [0, -22],
+    iconSize: [50, 50],
+    iconAnchor: [25, 25],
+    popupAnchor: [0, -25],
   });
 };
 
 const batasDesaLeuwilaja: [number, number][] = [
-  [-6.773076, 108.339799],
-  [-6.773213, 108.340664],
-  [-6.773135, 108.341889],
-  [-6.772814, 108.342910],
-  [-6.772465, 108.343515],
-  [-6.771570, 108.344543],
-  [-6.770760, 108.345598],
-  [-6.770382, 108.345908],
-  [-6.770103, 108.346457],
-  [-6.769921, 108.346823],
-  [-6.769809, 108.347259],
-  [-6.769781, 108.347766],
-  [-6.770913, 108.348709],
-  [-6.771514, 108.349455],
-  [-6.771528, 108.350159],
-  [-6.771473, 108.350764],
-  [-6.770997, 108.350877],
-  [-6.770494, 108.350820],
-  [-6.770061, 108.351243],
-  [-6.768887, 108.351806],
-  [-6.768593, 108.352214],
-  [-6.769642, 108.353115],
-  [-6.770075, 108.353340],
-  [-6.770494, 108.353467],
-  [-6.770927, 108.353495],
-  [-6.771724, 108.354142],
-  [-6.773094, 108.356057],
-  [-6.773443, 108.356577],
-  [-6.773988, 108.358323],
-  [-6.774282, 108.358928],
-  [-6.774603, 108.359378],
-  [-6.775526, 108.360040],
-  [-6.775847, 108.360392],
-  [-6.776295, 108.360730],
-  [-6.779020, 108.363151],
-  [-6.780124, 108.363967],
-  [-6.781536, 108.364558],
-  [-6.781480, 108.363967],
-  [-6.781452, 108.362137],
-  [-6.781578, 108.361476],
-  [-6.781704, 108.361011],
-  [-6.782053, 108.359772],
-  [-6.782277, 108.358632],
-  [-6.782304, 108.358350],
-  [-6.782382, 108.357586],
-  [-6.782456, 108.357065],
-  [-6.782524, 108.356254],
-  [-6.782675, 108.355517],
-  [-6.782743, 108.354490],
-  [-6.782759, 108.353569],
-  [-6.782722, 108.352669],
-  [-6.782790, 108.351094],
-  [-6.782210, 108.350868],
-  [-6.781870, 108.350547],
-  [-6.781483, 108.349657],
-  [-6.781248, 108.348299],
-  [-6.781368, 108.347930],
-  [-6.781237, 108.346961],
-  [-6.780683, 108.346587],
-  [-6.780166, 108.345998],
-  [-6.779821, 108.345819],
-  [-6.779250, 108.345848],
-  [-6.778649, 108.346238],
-  [-6.778236, 108.346090],
-  [-6.778105, 108.345063],
-  [-6.777713, 108.344795],
-  [-6.776840, 108.344368],
-  [-6.776411, 108.343884],
-  [-6.776301, 108.343415],
-  [-6.775894, 108.342931],
-  [-6.775261, 108.342763],
-  [-6.775198, 108.342231],
-  [-6.775271, 108.341757],
-  [-6.775198, 108.341230],
-  [-6.775062, 108.340920],
-  [-6.774587, 108.340472],
-  [-6.774100, 108.340146],
-  [-6.773076, 108.339799],
+  [-6.773076, 108.339799], [-6.773213, 108.340664], [-6.773135, 108.341889],
+  [-6.772814, 108.342910], [-6.772465, 108.343515], [-6.771570, 108.344543],
+  [-6.770760, 108.345598], [-6.770382, 108.345908], [-6.770103, 108.346457],
+  [-6.769921, 108.346823], [-6.769809, 108.347259], [-6.769781, 108.347766],
+  [-6.770913, 108.348709], [-6.771514, 108.349455], [-6.771528, 108.350159],
+  [-6.771473, 108.350764], [-6.770997, 108.350877], [-6.770494, 108.350820],
+  [-6.770061, 108.351243], [-6.768887, 108.351806], [-6.768593, 108.352214],
+  [-6.769642, 108.353115], [-6.770075, 108.353340], [-6.770494, 108.353467],
+  [-6.770927, 108.353495], [-6.771724, 108.354142], [-6.773094, 108.356057],
+  [-6.773443, 108.356577], [-6.773988, 108.358323], [-6.774282, 108.358928],
+  [-6.774603, 108.359378], [-6.775526, 108.360040], [-6.775847, 108.360392],
+  [-6.776295, 108.360730], [-6.779020, 108.363151], [-6.780124, 108.363967],
+  [-6.781536, 108.364558], [-6.781480, 108.363967], [-6.781452, 108.362137],
+  [-6.781578, 108.361476], [-6.781704, 108.361011], [-6.782053, 108.359772],
+  [-6.782277, 108.358632], [-6.782304, 108.358350], [-6.782382, 108.357586],
+  [-6.782456, 108.357065], [-6.782524, 108.356254], [-6.782675, 108.355517],
+  [-6.782743, 108.354490], [-6.782759, 108.353569], [-6.782722, 108.352669],
+  [-6.782790, 108.351094], [-6.782210, 108.350868], [-6.781870, 108.350547],
+  [-6.781483, 108.349657], [-6.781248, 108.348299], [-6.781368, 108.347930],
+  [-6.781237, 108.346961], [-6.780683, 108.346587], [-6.780166, 108.345998],
+  [-6.779821, 108.345819], [-6.779250, 108.345848], [-6.778649, 108.346238],
+  [-6.778236, 108.346090], [-6.778105, 108.345063], [-6.777713, 108.344795],
+  [-6.776840, 108.344368], [-6.776411, 108.343884], [-6.776301, 108.343415],
+  [-6.775894, 108.342931], [-6.775261, 108.342763], [-6.775198, 108.342231],
+  [-6.775271, 108.341757], [-6.775198, 108.341230], [-6.775062, 108.340920],
+  [-6.774587, 108.340472], [-6.774100, 108.340146], [-6.773076, 108.339799],
 ];
 
 const bounds: L.LatLngBoundsExpression = [
@@ -185,7 +135,7 @@ export default function MapPengepul() {
     return (
       <div className="w-full h-[calc(100vh-100px)] flex items-center justify-center bg-gray-100 rounded-2xl">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#6B8F71] mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Memuat peta...</p>
         </div>
       </div>
@@ -193,7 +143,7 @@ export default function MapPengepul() {
   }
 
   return (
-    <div className="w-full h-[calc(100vh-100px)] rounded-2xl overflow-hidden shadow-lg border border-gray-200 relative">
+    <div className="w-full h-[calc(100vh-100px)] rounded-2xl overflow-hidden shadow-xl border border-gray-200 relative">
       <MapContainer
         center={[-6.7750, 108.3520]}
         zoom={16}
@@ -216,10 +166,10 @@ export default function MapPengepul() {
         <Polygon
           positions={batasDesaLeuwilaja}
           pathOptions={{
-            color: "#ef4444",
-            weight: 2,
+            color: "#dc2626",
+            weight: 2.5,
             dashArray: "8, 6",
-            fillColor: "#ef4444",
+            fillColor: "#dc2626",
             fillOpacity: 0.08,
           }}
         />
@@ -229,46 +179,58 @@ export default function MapPengepul() {
             position={[p.koordinat.lat, p.koordinat.lng]}
             icon={createCustomIcon(p.foto.depan)}
           >
-            <Popup maxWidth={280}>
+            <Popup maxWidth={260} minWidth={220} className="custom-popup">
               <div className="font-sans">
-                <div className="relative w-full h-36 -mx-3 -mt-3 mb-3 overflow-hidden rounded-t-xl">
+                {/* Foto dengan badge RT */}
+                <div className="relative w-full h-32 -mx-4 -mt-3 mb-3 overflow-hidden rounded-t-lg">
                   <Image
                     src={p.foto.depan}
                     alt={p.nama}
                     fill
-                    sizes="280px"
+                    sizes="260px"
                     className="object-cover"
                   />
-                  <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full">
-                    <span className="text-xs font-bold text-[#6B8F71]">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                  <div className="absolute top-2 left-2 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-sm">
+                    <span className="text-xs font-bold text-emerald-700">
                       RT {p.rt.toString().padStart(2, "0")}
                     </span>
                   </div>
                 </div>
 
+                {/* Konten */}
                 <div className="px-1 pb-1">
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">{p.nama}</h3>
-                  <p className="text-xs text-gray-500 mb-3">{p.alamat}</p>
+                  <h3 className="text-base font-bold text-gray-900 mb-1 leading-tight">
+                    {p.nama}
+                  </h3>
+                  <p className="text-xs text-gray-500 mb-2.5 leading-relaxed line-clamp-2">
+                    {p.alamat}
+                  </p>
 
-                  <div className="flex flex-wrap gap-1 mb-3">
-                    {p.produk.slice(0, 2).map((prod, idx) => (
+                  {/* Produk */}
+                  <div className="flex flex-wrap gap-1 mb-2.5">
+                    {p.produk?.slice(0, 2).map((prod, idx) => (
                       <span
                         key={idx}
-                        className="text-xs bg-[#E8F3E8] text-[#4E6B53] px-2 py-0.5 rounded-full font-medium"
+                        className="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-medium border border-emerald-100"
                       >
                         {prod}
                       </span>
                     ))}
                   </div>
 
+                  {/* Harga */}
                   {p.harga && p.harga !== "-" && (
-                    <p className="text-sm font-semibold text-[#6B8F71] mb-3">{p.harga}</p>
+                    <p className="text-sm font-bold text-emerald-700 mb-3">
+                      {p.harga}
+                    </p>
                   )}
 
+                  {/* Tombol */}
                   <div className="flex gap-2">
                     <Link
                       href={`/pengepul/${p.slug}`}
-                      className="flex-1 text-center bg-[#6B8F71] text-white font-medium py-2 rounded-lg hover:bg-[#55755B] transition-colors text-sm"
+                      className="flex-1 text-center bg-emerald-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-emerald-700 transition-colors shadow-sm"
                     >
                       Detail
                     </Link>
@@ -276,7 +238,7 @@ export default function MapPengepul() {
                       href={`https://www.google.com/maps/dir/?api=1&destination=${p.koordinat.lat},${p.koordinat.lng}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 text-center bg-[#3b82f6] text-white font-medium py-2 rounded-lg hover:bg-[#2563eb] transition-colors text-sm"
+                      className="flex-1 text-center bg-blue-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
                     >
                       Navigasi
                     </a>
@@ -289,18 +251,35 @@ export default function MapPengepul() {
         <FitBoundsToMarkers data={pengepul} />
       </MapContainer>
 
-      <div className="absolute top-4 right-4 z-[1000] bg-white/90 backdrop-blur-sm rounded-xl shadow-md p-3">
-        <h4 className="text-sm font-bold text-gray-900 mb-2">Peta Sebaran</h4>
-        <div className="space-y-1.5 text-xs">
+      {/* Legend */}
+      <div className="absolute top-4 right-4 z-[1000] bg-white/95 backdrop-blur-md rounded-xl shadow-lg p-3.5 border border-gray-100">
+        <h4 className="text-sm font-bold text-gray-900 mb-2.5">Peta Sebaran</h4>
+        <div className="space-y-2 text-xs">
           <div className="flex items-center gap-2">
-            <div className="w-2.5 h-2.5 rounded-full bg-[#6B8F71]"></div>
-            <span className="text-gray-700">{pengepul.length} Pengepul</span>
+            <div className="w-3 h-3 rounded-full bg-emerald-600 shadow-sm"></div>
+            <span className="text-gray-700 font-medium">{pengepul.length} Pengepul</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-            <span className="text-gray-700">Batas Desa</span>
+            <div className="w-3 h-3 rounded-full bg-red-600 shadow-sm"></div>
+            <span className="text-gray-700 font-medium">Batas Desa</span>
           </div>
         </div>
+      </div>
+
+      {/* Zoom Control Custom */}
+      <div className="absolute bottom-6 right-4 z-[1000] flex flex-col gap-1">
+        <button
+          onClick={() => {}}
+          className="w-9 h-9 bg-white rounded-lg shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 font-bold text-lg border border-gray-200"
+        >
+          +
+        </button>
+        <button
+          onClick={() => {}}
+          className="w-9 h-9 bg-white rounded-lg shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 font-bold text-lg border border-gray-200"
+        >
+          −
+        </button>
       </div>
     </div>
   );

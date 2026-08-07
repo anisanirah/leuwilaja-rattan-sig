@@ -62,19 +62,19 @@ const createDotIcon = (rt: number) => {
     className: "custom-dot-marker",
     html: `
       <div style="
-        width: 16px;
-        height: 16px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
         background: ${color};
-        border: 3px solid white;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        border: 2px solid white;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.4);
         transition: transform 0.2s ease;
-      " onmouseover="this.style.transform='scale(1.5)'" onmouseout="this.style.transform='scale(1)'">
+      " onmouseover="this.style.transform='scale(2)'" onmouseout="this.style.transform='scale(1)'">
       </div>
     `,
-    iconSize: [16, 16],
-    iconAnchor: [8, 8],
-    popupAnchor: [0, -16],
+    iconSize: [10, 10],
+    iconAnchor: [5, 5],
+    popupAnchor: [0, -10],
   });
 };
 

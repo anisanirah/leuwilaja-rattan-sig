@@ -9,36 +9,47 @@ export const pengepul: Pengepul[] = [
 
   {
     id: 1,
-    slug: "jengki",  // ← Folder di RT 01 adalah "jengki"
-    nama: "Jengki",
+    slug: "engkos",
+    nama: "Engkos",
     rt: 1,
-    alamat: "RT 01, Desa Leuwilaja",
-    deskripsi:
-      "Bapak Jengki merupakan salah satu pengepul rotan yang berada di RT 01 Desa Leuwilaja. Usaha yang dijalankan berfokus pada produksi potato berbentuk kotak, salah satu produk kerajinan rotan yang banyak digunakan sebagai tempat penyimpanan maupun dekorasi. Dalam proses produksinya, bahan baku rotan terlebih dahulu direndam selama kurang lebih satu bulan agar menghasilkan kualitas yang baik sebelum dianyam menjadi produk jadi.",
+    alamat: "RT 01/RW 01, Desa Leuwilaja",
+    deskripsi: "Bapak Engkos merupakan salah satu pengepul rotan yang berada di RT 01/RW 01 Desa Leuwilaja. Usaha yang dijalankan berfokus pada produksi potato berbentuk kotak, salah satu produk kerajinan rotan yang banyak digunakan sebagai tempat penyimpanan maupun dekorasi. Dalam proses produksinya, bahan baku rotan terlebih dahulu direndam selama kurang lebih satu bulan agar menghasilkan kualitas yang baik sebelum dianyam menjadi produk jadi. Potato kotak dipasarkan dengan kisaran harga sekitar Rp40.000 per unit, dan hasil produksinya telah dipasarkan hingga ke wilayah Cirebon.",
     produk: ["Potato Kotak"],
-    harga: "Rp 40.000 per unit",
-    telepon: "-",
-    koordinat: { lat: -6.7809818, lng: 108.3498606 },
+    harga: "Rp 40.000",
+    telepon: "",
+    koordinat: { lat: -6.7782641, lng: 108.3481617 },
     foto: {
-      depan: "/images/pengepul/rt1/jengki/depan-rumah-1.jpeg",  // ← Path yang benar
-      galeri: buildGaleri("rt1/jengki", 5),
+      depan: "/images/pengepul/rt1/engkos/depan-rumah-1.jpeg",
+      galeri: [
+        "/images/pengepul/rt1/engkos/1.jpeg",
+        "/images/pengepul/rt1/engkos/2.jpeg",
+        "/images/pengepul/rt1/engkos/3.jpeg",
+        "/images/pengepul/rt1/engkos/4.jpeg",
+        "/images/pengepul/rt1/engkos/5.jpeg",
+        "/images/pengepul/rt1/engkos/6.jpeg",
+      ],
     },
   },
   {
     id: 2,
-    slug: "engkos",  // ← Folder di RT 02 adalah "engkos"
-    nama: "Engkos",
+    slug: "jengki",
+    nama: "Jengki",
     rt: 2,
     alamat: "Blok Jumat, RT 02/RW 01, Desa Leuwilaja",
-    deskripsi:
-      "Usaha milik Bapak Engkos berlokasi di Blok Jumat, RT 02/RW 01, Desa Leuwilaja dan telah beroperasi sejak tahun 1985. Selama puluhan tahun beliau memproduksi rangka rotan, yaitu komponen dasar yang digunakan dalam pembuatan berbagai jenis kerajinan rotan.",
+    deskripsi: "Usaha milik Bapak Jengki berlokasi di Blok Jumat, RT 02/RW 01, Desa Leuwilaja dan telah beroperasi sejak tahun 1985. Selama puluhan tahun beliau memproduksi rangka rotan, yaitu komponen dasar yang digunakan dalam pembuatan berbagai jenis kerajinan rotan. Produk rangka rotan dipasarkan dengan kisaran harga Rp10.000 hingga Rp40.000 per unit. Hingga saat ini usaha tersebut dikelola bersama 1 orang pekerja dan tetap menjadi bagian dari aktivitas industri rotan di Desa Leuwilaja.",
     produk: ["Rangka Rotan"],
-    harga: "Rp 10.000 – Rp 40.000 per unit",
-    telepon: "-",
-    koordinat: { lat: -6.7782641, lng: 108.3481617 },
+    harga: "Rp 10.000 – Rp 40.000",
+    telepon: "",
+    koordinat: { lat: -6.7809818, lng: 108.3498606 },
     foto: {
-      depan: "/images/pengepul/rt2/engkos/depan-rumah-2.jpeg",  // ← Path yang benar
-      galeri: buildGaleri("rt2/engkos", 6),
+      depan: "/images/pengepul/rt2/jengki/depan-rumah-2.jpeg",
+      galeri: [
+        "/images/pengepul/rt2/jengki/1.jpeg",
+        "/images/pengepul/rt2/jengki/2.jpeg",
+        "/images/pengepul/rt2/jengki/3.jpeg",
+        "/images/pengepul/rt2/jengki/4.jpeg",
+        "/images/pengepul/rt2/jengki/5.jpeg",
+      ],
     },
   },
   {

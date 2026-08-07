@@ -56,27 +56,27 @@ function FitBoundsToMarkers({ data }: { data: PengepulData[] }) {
 }
 
 // Marker titik kecil dengan warna
-const createDotIcon = (rt: number) => {
-  const color = RT_COLORS[rt] || "#6b7280";
-  return L.divIcon({
-    className: "custom-dot-marker",
-    html: `
-      <div style="
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: ${color};
-        border: 2px solid white;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.4);
-        transition: transform 0.2s ease;
-      " onmouseover="this.style.transform='scale(2)'" onmouseout="this.style.transform='scale(1)'">
-      </div>
-    `,
-    iconSize: [10, 10],
-    iconAnchor: [5, 5],
-    popupAnchor: [0, -10],
-  });
-};
+  const createDotIcon = (rt: number) => {
+    const color = RT_COLORS[rt] || "#6b7280";
+    return L.divIcon({
+      className: "custom-dot-marker",
+      html: `
+        <div style="
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: ${color};
+          border: 2px solid white;
+          box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+          transition: transform 0.2s ease;
+        " onmouseover="this.style.transform='scale(2)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+      `,
+      iconSize: [10, 10],
+      iconAnchor: [5, 5],
+      popupAnchor: [0, -10],
+    });
+  };
 
 const batasDesaLeuwilaja: [number, number][] = [
   [-6.773076, 108.339799], [-6.773213, 108.340664], [-6.773135, 108.341889],

@@ -6,7 +6,6 @@ const buildGaleri = (folder: string, count: number, ext = "jpeg") =>
 
 export const pengepul: Pengepul[] = [
 // Update bagian RT 01 dan RT 02 di file src/data/pengepul.ts
-
   {
     id: 1,
     slug: "engkos",
@@ -19,14 +18,14 @@ export const pengepul: Pengepul[] = [
     telepon: "",
     koordinat: { lat: -6.7782641, lng: 108.3481617 },
     foto: {
-      depan: "/images/pengepul/rt1/engkos/depan-rumah-1.jpeg",
+      depan: "/images/pengepul/rt2/engkos/depan-rumah-2.jpeg",
       galeri: [
-        "/images/pengepul/rt1/engkos/1.jpeg",
-        "/images/pengepul/rt1/engkos/2.jpeg",
-        "/images/pengepul/rt1/engkos/3.jpeg",
-        "/images/pengepul/rt1/engkos/4.jpeg",
-        "/images/pengepul/rt1/engkos/5.jpeg",
-        "/images/pengepul/rt1/engkos/6.jpeg",
+        "/images/pengepul/rt2/engkos/1.jpeg",
+        "/images/pengepul/rt2/engkos/2.jpeg",
+        "/images/pengepul/rt2/engkos/3.jpeg",
+        "/images/pengepul/rt2/engkos/4.jpeg",
+        "/images/pengepul/rt2/engkos/5.jpeg",
+        "/images/pengepul/rt2/engkos/6.jpeg",
       ],
     },
   },

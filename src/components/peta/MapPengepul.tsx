@@ -22,6 +22,26 @@ interface PengepulData {
   foto: { depan: string; galeri: string[] };
 }
 
+// Warna berbeda untuk setiap RT
+const RT_COLORS: { [key: number]: string } = {
+  1: "#dc2626",   // Merah
+  2: "#ea580c",   // Oranye
+  3: "#d97706",   // Amber
+  4: "#65a30d",   // Lime
+  5: "#16a34a",   // Hijau
+  6: "#0891b2",   // Cyan
+  7: "#0284c7",   // Biru
+  8: "#2563eb",   // Blue
+  9: "#4f46e5",   // Indigo
+  10: "#7c3aed",  // Violet
+  11: "#a855f7",  // Purple
+  12: "#db2777",  // Pink
+  13: "#e11d48",  // Rose
+  14: "#f43f5e",  // Pink Red
+  15: "#ef4444",  // Red
+  16: "#f97316",  // Orange
+};
+
 function FitBoundsToMarkers({ data }: { data: PengepulData[] }) {
   const map = useMap();
   useEffect(() => {
@@ -35,31 +55,26 @@ function FitBoundsToMarkers({ data }: { data: PengepulData[] }) {
   return null;
 }
 
-const createCustomIcon = (fotoUrl: string) => {
+// Marker titik kecil dengan warna
+const createDotIcon = (rt: number) => {
+  const color = RT_COLORS[rt] || "#6b7280";
   return L.divIcon({
-    className: "custom-marker",
+    className: "custom-dot-marker",
     html: `
       <div style="
-        width: 52px;
-        height: 52px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
-        border: 3px solid white;
-        box-shadow: 0 3px 12px rgba(0,0,0,0.35);
-        overflow: hidden;
-        background: white;
+        background: ${color};
+        border: 2px solid white;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.4);
         transition: transform 0.2s ease;
-      " onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
-        <img 
-          src="${fotoUrl}" 
-          alt="Foto" 
-          style="width:100%;height:100%;object-fit:cover;"
-          onerror="this.parentElement.style.background='linear-gradient(135deg, #059669, #047857)'"
-        />
+      " onmouseover="this.style.transform='scale(2)'" onmouseout="this.style.transform='scale(1)'">
       </div>
     `,
-    iconSize: [52, 52],
-    iconAnchor: [26, 26],
-    popupAnchor: [0, -26],
+    iconSize: [10, 10],
+    iconAnchor: [5, 5],
+    popupAnchor: [0, -10],
   });
 };
 
@@ -100,6 +115,7 @@ const bounds: L.LatLngBoundsExpression = [
 export default function MapPengepul() {
   const [pengepul, setPengepul] = useState<PengepulData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedRT, setSelectedRT] = useState<number | null>(null);
 
   useEffect(() => {
     async function fetchPengepul() {
@@ -130,6 +146,17 @@ export default function MapPengepul() {
     fetchPengepul();
   }, []);
 
+  // Kelompokkan data per RT
+  const groupedByRT = pengepul.reduce((acc, p) => {
+    if (!acc[p.rt]) {
+      acc[p.rt] = [];
+    }
+    acc[p.rt].push(p);
+    return acc;
+  }, {} as { [key: number]: PengepulData[] });
+
+  const uniqueRTs = Object.keys(groupedByRT).map(Number).sort((a, b) => a - b);
+
   if (loading) {
     return (
       <div className="w-full h-[calc(100vh-100px)] flex items-center justify-center bg-gray-100 rounded-2xl">
@@ -143,50 +170,20 @@ export default function MapPengepul() {
 
   return (
     <div className="w-full h-[calc(100vh-100px)] rounded-2xl overflow-hidden shadow-xl border border-gray-200 relative">
-      {/* Custom CSS untuk popup Leaflet */}
+      {/* Custom CSS untuk popup */}
       <style jsx global>{`
         .leaflet-popup-content-wrapper {
-          border-radius: 16px !important;
+          border-radius: 12px !important;
           padding: 0 !important;
-          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
-          overflow: visible !important;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
         }
         .leaflet-popup-content {
           margin: 0 !important;
-          min-width: 320px !important;
-          max-width: 360px !important;
+          min-width: 240px !important;
+          max-width: 280px !important;
         }
         .leaflet-popup-tip {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-        }
-        .leaflet-container a.leaflet-popup-close-button {
-          position: absolute !important;
-          top: 8px !important;
-          right: 8px !important;
-          width: 28px !important;
-          height: 28px !important;
-          background: white !important;
-          border-radius: 50% !important;
-          display: flex !important;
-          align-items: center !important;
-          justify-content: center !important;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-          color: #6b7280 !important;
-          font-size: 18px !important;
-          font-weight: 400 !important;
-          padding: 0 !important;
-          line-height: 28px !important;
-          text-align: center !important;
-          z-index: 1000 !important;
-          transition: all 0.2s !important;
-        }
-        .leaflet-container a.leaflet-popup-close-button:hover {
-          background: #f3f4f6 !important;
-          color: #111827 !important;
-          transform: scale(1.1);
-        }
-        .leaflet-popup {
-          z-index: 900 !important;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
         }
       `}</style>
 
@@ -223,83 +220,51 @@ export default function MapPengepul() {
           <Marker
             key={p.id}
             position={[p.koordinat.lat, p.koordinat.lng]}
-            icon={createCustomIcon(p.foto.depan)}
+            icon={createDotIcon(p.rt)}
           >
             <Popup>
-              <div className="flex gap-3 p-4 pt-5">
-                {/* Foto Kiri */}
-                <div className="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden bg-gray-100">
-                  <Image
-                    src={p.foto.depan}
-                    alt={p.nama}
-                    fill
-                    sizes="96px"
-                    className="object-cover"
-                  />
-                  <div className="absolute top-1 left-1 bg-white/95 backdrop-blur-sm px-1.5 py-0.5 rounded-md shadow-sm">
-                    <span className="text-[10px] font-bold text-emerald-700">
-                      RT {p.rt.toString().padStart(2, "0")}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Info Kanan */}
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-lg font-bold text-gray-900 mb-0.5 leading-tight">
+              <div className="p-3">
+                <div className="flex items-center gap-2 mb-2">
+                  <div 
+                    className="w-3 h-3 rounded-full"
+                    style={{ backgroundColor: RT_COLORS[p.rt] || "#6b7280" }}
+                  ></div>
+                  <h3 className="text-base font-bold text-gray-900">
                     {p.nama}
                   </h3>
-                  <div className="flex items-center gap-1 text-xs text-gray-500 mb-2">
-                    <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    <span className="truncate">RT {p.rt.toString().padStart(2, "0")}, Desa Leuwilaja</span>
+                </div>
+                <p className="text-xs text-gray-500 mb-1">RT {p.rt.toString().padStart(2, "0")}</p>
+                <p className="text-xs text-gray-600 mb-2 line-clamp-2">{p.alamat}</p>
+                {p.produk && p.produk.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mb-2">
+                    {p.produk.slice(0, 2).map((prod, idx) => (
+                      <span
+                        key={idx}
+                        className="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-medium"
+                      >
+                        {prod}
+                      </span>
+                    ))}
                   </div>
-
-                  {/* Produk Badge */}
-                  {p.produk && p.produk.length > 0 && (
-                    <div className="flex flex-wrap gap-1 mb-2">
-                      {p.produk.slice(0, 2).map((prod, idx) => (
-                        <span
-                          key={idx}
-                          className="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-md font-medium border border-emerald-100"
-                        >
-                          {prod}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Harga */}
-                  {p.harga && p.harga !== "-" && (
-                    <p className="text-sm font-bold text-emerald-700 mb-3">
-                      {p.harga}
-                    </p>
-                  )}
-
-                  {/* Tombol */}
-                  <div className="flex gap-2 mt-1">
-                    <Link
-                      href={`/pengepul/${p.slug}`}
-                      className="flex-1 flex items-center justify-center gap-1 text-xs font-semibold text-gray-700 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
-                    >
-                      Detail
-                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
-                    <a
-                      href={`https://www.google.com/maps/dir/?api=1&destination=${p.koordinat.lat},${p.koordinat.lng}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-1 text-xs font-semibold text-emerald-700 bg-white py-2 rounded-lg border border-emerald-200 hover:bg-emerald-50 transition-colors"
-                    >
-                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                      </svg>
-                      Navigasi
-                    </a>
-                  </div>
+                )}
+                {p.harga && p.harga !== "-" && (
+                  <p className="text-sm font-bold text-emerald-700">{p.harga}</p>
+                )}
+                <div className="flex gap-2 mt-2">
+                  <Link
+                    href={`/pengepul/${p.slug}`}
+                    className="flex-1 text-center text-xs font-semibold text-emerald-700 bg-emerald-50 py-1.5 rounded-lg hover:bg-emerald-100 transition-colors"
+                  >
+                    Detail
+                  </Link>
+                  <a
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${p.koordinat.lat},${p.koordinat.lng}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 text-center text-xs font-semibold text-white bg-emerald-600 py-1.5 rounded-lg hover:bg-emerald-700 transition-colors"
+                  >
+                    Navigasi
+                  </a>
                 </div>
               </div>
             </Popup>
@@ -308,19 +273,54 @@ export default function MapPengepul() {
         <FitBoundsToMarkers data={pengepul} />
       </MapContainer>
 
-      {/* Legend */}
-      <div className="absolute top-4 right-4 z-[1000] bg-white/95 backdrop-blur-md rounded-xl shadow-lg p-3.5 border border-gray-100">
-        <h4 className="text-sm font-bold text-gray-900 mb-2.5">Peta Sebaran</h4>
-        <div className="space-y-2 text-xs">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-emerald-600 shadow-sm"></div>
-            <span className="text-gray-700 font-medium">{pengepul.length} Pengepul</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-600 shadow-sm"></div>
-            <span className="text-gray-700 font-medium">Batas Desa</span>
-          </div>
+      {/* Legend RT */}
+      <div className="absolute top-4 right-4 z-[1000] bg-white/95 backdrop-blur-md rounded-xl shadow-lg p-4 border border-gray-100 max-h-[calc(100vh-200px)] overflow-y-auto">
+        <h4 className="text-sm font-bold text-gray-900 mb-3">Peta Sebaran</h4>
+        
+        <div className="space-y-1.5 mb-3 pb-3 border-b border-gray-200">
+          <p className="text-xs text-gray-600 font-medium">{pengepul.length} Pengepul</p>
+          <p className="text-xs text-gray-600 font-medium">{uniqueRTs.length} RT</p>
         </div>
+
+        <div className="space-y-1.5">
+          <p className="text-xs font-semibold text-gray-700 mb-2">Legenda RT:</p>
+          {uniqueRTs.map((rt) => (
+            <button
+              key={rt}
+              onClick={() => setSelectedRT(selectedRT === rt ? null : rt)}
+              className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg transition-all ${
+                selectedRT === rt ? "bg-gray-100" : "hover:bg-gray-50"
+              }`}
+            >
+              <div 
+                className="w-3 h-3 rounded-full flex-shrink-0"
+                style={{ backgroundColor: RT_COLORS[rt] || "#6b7280" }}
+              ></div>
+              <span className="text-xs font-medium text-gray-700">
+                RT {rt.toString().padStart(2, "0")}
+              </span>
+              <span className="text-xs text-gray-500 ml-auto">
+                {groupedByRT[rt].length}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Zoom Control */}
+      <div className="absolute bottom-6 right-4 z-[1000] flex flex-col gap-1">
+        <button
+          onClick={() => {}}
+          className="w-9 h-9 bg-white rounded-lg shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 font-bold text-lg border border-gray-200"
+        >
+          +
+        </button>
+        <button
+          onClick={() => {}}
+          className="w-9 h-9 bg-white rounded-lg shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 font-bold text-lg border border-gray-200"
+        >
+          −
+        </button>
       </div>
     </div>
   );

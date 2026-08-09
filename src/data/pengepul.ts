@@ -15,7 +15,7 @@ export const pengepul: Pengepul[] = [
     produk: ["Potato Kotak"],
     harga: "Rp 40.000",
     telepon: "-",
-    koordinat: { lat: -6.7782641, lng: 108.3481617 },
+    koordinat: { lat: -6.7809818, lng: 108.3498606 },
     foto: {
       depan: "/images/pengepul/rt1/engkos/depan-rumah-1.jpeg",
       galeri: buildGaleri("rt1/engkos", 6),
@@ -31,9 +31,9 @@ export const pengepul: Pengepul[] = [
     produk: ["Rangka Rotan"],
     harga: "Rp 10.000 – Rp 40.000",
     telepon: "-",
-    koordinat: { lat: -6.7809818, lng: 108.3498606 },
+    koordinat: { lat: -6.7782641, lng: 108.3481617 },
     foto: {
-      depan: "/images/pengepul/rt1/jengki/depan-rumah-1.jpeg",
+      depan: "/images/pengepul/rt1/jengki/depan-rumah-2.jpeg",
       galeri: buildGaleri("rt1/jengki", 5),
     },
   },

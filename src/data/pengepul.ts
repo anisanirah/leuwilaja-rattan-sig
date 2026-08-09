@@ -15,7 +15,7 @@ export const pengepul: Pengepul[] = [
     produk: ["Potato Kotak"],
     harga: "Rp 40.000",
     telepon: "-",
-    koordinat: { lat: -6.7782641, lng: 108.3481617 }, // <-- KOORDINAT ENGKOS YANG BENAR
+    koordinat: { lat: -6.7782641, lng: 108.3481617 },
     foto: {
       depan: "/images/pengepul/rt1/engkos/depan-rumah-1.jpeg",
       galeri: buildGaleri("rt1/engkos", 6),
@@ -31,10 +31,10 @@ export const pengepul: Pengepul[] = [
     produk: ["Rangka Rotan"],
     harga: "Rp 10.000 – Rp 40.000",
     telepon: "-",
-    koordinat: { lat: -6.7809818, lng: 108.3498606 }, // <-- KOORDINAT JENGKI YANG BENAR
+    koordinat: { lat: -6.7809818, lng: 108.3498606 },
     foto: {
-      depan: "/images/pengepul/rt2/jengki/depan-rumah-2.jpeg", // <-- PATH FOLDER RT2 YANG BENAR
-      galeri: buildGaleri("rt2/jengki", 5), // <-- PATH FOLDER RT2 YANG BENAR
+      depan: "/images/pengepul/rt2/jengki/depan-rumah-2.jpeg",
+      galeri: buildGaleri("rt2/jengki", 5),
     },
   },
   {
@@ -271,7 +271,7 @@ export const pengepul: Pengepul[] = [
     produk: ["Potato"],
     harga: "-",
     telepon: "-",
-    koordinat: { lat: -6.7784619, lng: 108.3590683 }, // <-- KOORDINAT RT 12 YANG BENAR
+    koordinat: { lat: -6.7784619, lng: 108.3590683 },
     foto: {
       depan: "/images/pengepul/rt12/jaenudin/depan-rumah-12.jpeg",
       galeri: buildGaleri("rt12/jaenudin", 4),

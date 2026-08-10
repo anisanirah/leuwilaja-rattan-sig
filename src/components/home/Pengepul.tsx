@@ -26,8 +26,8 @@ export function Pengepul() {
           </p>
         </div>
 
-        {/* Grid Cards */}
-          <div className="grid grid-cols-4 gap-4">
+        {/* Grid Cards - 2 kolom di HP, 4 kolom di laptop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
           {preview.map((p) => (
             <PengepulCard key={p.id} data={p} />
           ))}

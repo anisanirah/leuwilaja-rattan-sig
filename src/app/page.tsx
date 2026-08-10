@@ -1,6 +1,6 @@
 import { Hero } from "@/components/home/Hero";
 import { Pengepul } from "@/components/home/Pengepul";
-import { Gallery } from "@/components/home/Gallery";
+import { Galeri } from "@/components/home/Galeri";
 import { WhySection } from "@/components/home/WhySection";
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
       <Hero />
       {/* Stats dihapus */}
       <Pengepul />
-      <Gallery />
+      <Galeri />
       <WhySection />
     </>
   );

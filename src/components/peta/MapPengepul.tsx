@@ -6,7 +6,6 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { supabase } from "@/lib/supabaseClient";
 import Link from "next/link";
-import Image from "next/image";
 
 interface PengepulData {
   id: number;
@@ -22,33 +21,19 @@ interface PengepulData {
   foto: { depan: string; galeri: string[] };
 }
 
-// Warna berbeda untuk setiap RT
+// Warna berbeda untuk setiap RT (tetap dipakai untuk marker & popup)
 const RT_COLORS: { [key: number]: string } = {
-  1: "#dc2626",   // Merah
-  2: "#ea580c",   // Oranye
-  3: "#d97706",   // Amber
-  4: "#65a30d",   // Lime
-  5: "#16a34a",   // Hijau
-  6: "#0891b2",   // Cyan
-  7: "#0284c7",   // Biru
-  8: "#2563eb",   // Blue
-  9: "#4f46e5",   // Indigo
-  10: "#7c3aed",  // Violet
-  11: "#a855f7",  // Purple
-  12: "#db2777",  // Pink
-  13: "#e11d48",  // Rose
-  14: "#f43f5e",  // Pink Red
-  15: "#ef4444",  // Red
-  16: "#f97316",  // Orange
+  1: "#dc2626", 2: "#ea580c", 3: "#d97706", 4: "#65a30d",
+  5: "#16a34a", 6: "#0891b2", 7: "#0284c7", 8: "#2563eb",
+  9: "#4f46e5", 10: "#7c3aed", 11: "#a855f7", 12: "#db2777",
+  13: "#e11d48", 14: "#f43f5e", 15: "#ef4444", 16: "#f97316",
 };
 
 function FitBoundsToMarkers({ data }: { data: PengepulData[] }) {
   const map = useMap();
   useEffect(() => {
     if (data.length > 0) {
-      const bounds = L.latLngBounds(
-        data.map((p) => [p.koordinat.lat, p.koordinat.lng])
-      );
+      const bounds = L.latLngBounds(data.map((p) => [p.koordinat.lat, p.koordinat.lng]));
       map.fitBounds(bounds, { padding: [60, 60], maxZoom: 16 });
     }
   }, [map, data]);
@@ -56,27 +41,24 @@ function FitBoundsToMarkers({ data }: { data: PengepulData[] }) {
 }
 
 // Marker titik kecil dengan warna
-  const createDotIcon = (rt: number) => {
-    const color = RT_COLORS[rt] || "#6b7280";
-    return L.divIcon({
-      className: "custom-dot-marker",
-      html: `
-        <div style="
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          background: ${color};
-          border: 2px solid white;
-          box-shadow: 0 1px 4px rgba(0,0,0,0.4);
-          transition: transform 0.2s ease;
-        " onmouseover="this.style.transform='scale(2)'" onmouseout="this.style.transform='scale(1)'">
-        </div>
-      `,
-      iconSize: [10, 10],
-      iconAnchor: [5, 5],
-      popupAnchor: [0, -10],
-    });
-  };
+const createDotIcon = (rt: number) => {
+  const color = RT_COLORS[rt] || "#6b7280";
+  return L.divIcon({
+    className: "custom-dot-marker",
+    html: `
+      <div style="
+        width: 12px; height: 12px; border-radius: 50%;
+        background: ${color}; border: 2px solid white;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+        transition: transform 0.2s ease;
+      " onmouseover="this.style.transform='scale(1.5)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+    `,
+    iconSize: [12, 12],
+    iconAnchor: [6, 6],
+    popupAnchor: [0, -10],
+  });
+};
 
 const batasDesaLeuwilaja: [number, number][] = [
   [-6.773076, 108.339799], [-6.773213, 108.340664], [-6.773135, 108.341889],
@@ -115,7 +97,6 @@ const bounds: L.LatLngBoundsExpression = [
 export default function MapPengepul() {
   const [pengepul, setPengepul] = useState<PengepulData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedRT, setSelectedRT] = useState<number | null>(null);
 
   useEffect(() => {
     async function fetchPengepul() {
@@ -146,22 +127,11 @@ export default function MapPengepul() {
     fetchPengepul();
   }, []);
 
-  // Kelompokkan data per RT
-  const groupedByRT = pengepul.reduce((acc, p) => {
-    if (!acc[p.rt]) {
-      acc[p.rt] = [];
-    }
-    acc[p.rt].push(p);
-    return acc;
-  }, {} as { [key: number]: PengepulData[] });
-
-  const uniqueRTs = Object.keys(groupedByRT).map(Number).sort((a, b) => a - b);
-
   if (loading) {
     return (
-      <div className="w-full h-[calc(100vh-100px)] flex items-center justify-center bg-gray-100 rounded-2xl">
+      <div className="w-full h-[500px] md:h-[600px] flex items-center justify-center bg-gray-100 rounded-2xl">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#6B8F71] mx-auto mb-4"></div>
           <p className="text-gray-600">Memuat peta...</p>
         </div>
       </div>
@@ -169,8 +139,8 @@ export default function MapPengepul() {
   }
 
   return (
-    <div className="w-full h-[calc(100vh-100px)] rounded-2xl overflow-hidden shadow-xl border border-gray-200 relative">
-      {/* Custom CSS untuk popup */}
+    <div className="w-full h-[500px] md:h-[600px] rounded-2xl overflow-hidden shadow-xl border border-gray-200 relative">
+      {/* Custom CSS untuk popup agar lebih cantik */}
       <style jsx global>{`
         .leaflet-popup-content-wrapper {
           border-radius: 12px !important;
@@ -189,7 +159,7 @@ export default function MapPengepul() {
 
       <MapContainer
         center={[-6.7750, 108.3520]}
-        zoom={16}
+        zoom={15}
         minZoom={14}
         maxZoom={19}
         maxBounds={bounds}
@@ -229,19 +199,14 @@ export default function MapPengepul() {
                     className="w-3 h-3 rounded-full"
                     style={{ backgroundColor: RT_COLORS[p.rt] || "#6b7280" }}
                   ></div>
-                  <h3 className="text-base font-bold text-gray-900">
-                    {p.nama}
-                  </h3>
+                  <h3 className="text-base font-bold text-gray-900">{p.nama}</h3>
                 </div>
                 <p className="text-xs text-gray-500 mb-1">RT {p.rt.toString().padStart(2, "0")}</p>
                 <p className="text-xs text-gray-600 mb-2 line-clamp-2">{p.alamat}</p>
                 {p.produk && p.produk.length > 0 && (
                   <div className="flex flex-wrap gap-1 mb-2">
                     {p.produk.slice(0, 2).map((prod, idx) => (
-                      <span
-                        key={idx}
-                        className="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-medium"
-                      >
+                      <span key={idx} className="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-medium">
                         {prod}
                       </span>
                     ))}
@@ -272,56 +237,6 @@ export default function MapPengepul() {
         ))}
         <FitBoundsToMarkers data={pengepul} />
       </MapContainer>
-
-      {/* Legend RT */}
-      <div className="absolute top-4 right-4 z-[1000] bg-white/95 backdrop-blur-md rounded-xl shadow-lg p-4 border border-gray-100 max-h-[calc(100vh-200px)] overflow-y-auto">
-        <h4 className="text-sm font-bold text-gray-900 mb-3">Peta Sebaran</h4>
-        
-        <div className="space-y-1.5 mb-3 pb-3 border-b border-gray-200">
-          <p className="text-xs text-gray-600 font-medium">{pengepul.length} Pengepul</p>
-          <p className="text-xs text-gray-600 font-medium">{uniqueRTs.length} RT</p>
-        </div>
-
-        <div className="space-y-1.5">
-          <p className="text-xs font-semibold text-gray-700 mb-2">Legenda RT:</p>
-          {uniqueRTs.map((rt) => (
-            <button
-              key={rt}
-              onClick={() => setSelectedRT(selectedRT === rt ? null : rt)}
-              className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg transition-all ${
-                selectedRT === rt ? "bg-gray-100" : "hover:bg-gray-50"
-              }`}
-            >
-              <div 
-                className="w-3 h-3 rounded-full flex-shrink-0"
-                style={{ backgroundColor: RT_COLORS[rt] || "#6b7280" }}
-              ></div>
-              <span className="text-xs font-medium text-gray-700">
-                RT {rt.toString().padStart(2, "0")}
-              </span>
-              <span className="text-xs text-gray-500 ml-auto">
-                {groupedByRT[rt].length}
-              </span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Zoom Control */}
-      <div className="absolute bottom-6 right-4 z-[1000] flex flex-col gap-1">
-        <button
-          onClick={() => {}}
-          className="w-9 h-9 bg-white rounded-lg shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 font-bold text-lg border border-gray-200"
-        >
-          +
-        </button>
-        <button
-          onClick={() => {}}
-          className="w-9 h-9 bg-white rounded-lg shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 font-bold text-lg border border-gray-200"
-        >
-          −
-        </button>
-      </div>
     </div>
   );
 }

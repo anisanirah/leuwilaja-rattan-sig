@@ -1,6 +1,5 @@
 import type { Pengepul } from "@/types/pengepul";
 
-// Helper: membuat array path foto dari pola folder
 const buildGaleri = (folder: string, count: number, ext = "jpeg") =>
   Array.from({ length: count }, (_, i) => `/images/pengepul/${folder}/${i + 1}.${ext}`);
 
@@ -135,6 +134,22 @@ export const pengepul: Pengepul[] = [
   },
   {
     id: 9,
+    slug: "pulung",
+    nama: "Pulung Wijaya",
+    rt: 5,
+    alamat: "RT 05 RW 02, Blok Senin, Desa Leuwilaja",
+    deskripsi: "Usaha kerajinan rotan milik Pulung Wijaya berlokasi di RT 05 RW 02, Blok Senin, Desa Leuwilaja dan telah berdiri sejak tahun 1980. Usaha ini bergerak di bidang produksi kerajinan rotan, khususnya berbagai jenis keranjang, dengan potato sebagai salah satu produk unggulannya. Dengan pengalaman lebih dari empat dekade, usaha ini terus berkembang dan menjadi salah satu bagian dari potensi kerajinan rotan yang ada di Desa Leuwilaja. Dalam proses produksinya, usaha ini saat ini melibatkan sekitar 20 orang pekerja, dan pada masa tertentu jumlah pekerja bahkan pernah mencapai sekitar 100 orang. Keberadaan usaha ini tidak hanya menghasilkan produk kerajinan yang memiliki nilai guna dan estetika, tetapi juga turut membuka lapangan pekerjaan serta memberikan kontribusi terhadap perekonomian masyarakat sekitar.",
+    produk: ["Keranjang Rotan", "Potato"],
+    harga: "-",
+    telepon: "-",
+    koordinat: { lat: -6.773404, lng: 108.347186 },
+    foto: {
+      depan: "/images/pengepul/rt5/pulung/depan-rumah-5.jpeg",
+      galeri: buildGaleri("rt5/pulung", 4),
+    },
+  },
+  {
+    id: 10,
     slug: "nanang",
     nama: "Nanang",
     rt: 7,
@@ -150,7 +165,7 @@ export const pengepul: Pengepul[] = [
     },
   },
   {
-    id: 10,
+    id: 11,
     slug: "sudanto",
     nama: "Sudanto",
     rt: 8,
@@ -166,7 +181,7 @@ export const pengepul: Pengepul[] = [
     },
   },
   {
-    id: 11,
+    id: 12,
     slug: "asmad",
     nama: "Asmad",
     rt: 8,
@@ -182,7 +197,7 @@ export const pengepul: Pengepul[] = [
     },
   },
   {
-    id: 12,
+    id: 13,
     slug: "asmar",
     nama: "Asmar",
     rt: 9,
@@ -198,7 +213,7 @@ export const pengepul: Pengepul[] = [
     },
   },
   {
-    id: 13,
+    id: 14,
     slug: "johar",
     nama: "Johar",
     rt: 9,
@@ -214,7 +229,7 @@ export const pengepul: Pengepul[] = [
     },
   },
   {
-    id: 14,
+    id: 15,
     slug: "pepen",
     nama: "Pepen",
     rt: 9,
@@ -230,7 +245,7 @@ export const pengepul: Pengepul[] = [
     },
   },
   {
-    id: 15,
+    id: 16,
     slug: "emon",
     nama: "Emon Suherman (Gudang 1)",
     rt: 10,
@@ -246,7 +261,7 @@ export const pengepul: Pengepul[] = [
     },
   },
   {
-    id: 16,
+    id: 17,
     slug: "emon-gudang-2",
     nama: "Emon Suherman (Gudang 2)",
     rt: 11,
@@ -262,7 +277,7 @@ export const pengepul: Pengepul[] = [
     },
   },
   {
-    id: 17,
+    id: 18,
     slug: "jaenudin",
     nama: "Jaenudin",
     rt: 12,
@@ -278,7 +293,7 @@ export const pengepul: Pengepul[] = [
     },
   },
   {
-    id: 18,
+    id: 19,
     slug: "asep",
     nama: "Asep Priyanto",
     rt: 13,
@@ -294,7 +309,7 @@ export const pengepul: Pengepul[] = [
     },
   },
   {
-    id: 19,
+    id: 20,
     slug: "arief",
     nama: "Arif",
     rt: 14,
@@ -310,7 +325,7 @@ export const pengepul: Pengepul[] = [
     },
   },
   {
-    id: 20,
+    id: 21,
     slug: "nana",
     nama: "Nana",
     rt: 15,
@@ -326,7 +341,7 @@ export const pengepul: Pengepul[] = [
     },
   },
   {
-    id: 21,
+    id: 22,
     slug: "onong",
     nama: "Onong (Saung Rotan)",
     rt: 16,

@@ -2,6 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Pengepul } from "@/types/pengepul";
 
+// Helper untuk handle URL foto (bisa URL Supabase atau path lokal)
+function getFotoUrl(path: string | null | undefined): string {
+  if (!path) return '/images/placeholder.jpg';
+  
+  // Kalau URL lengkap dari Supabase Storage
+  if (path.startsWith('http')) return path;
+  
+  // Kalau path lokal dari GitHub
+  return path;
+}
+
 export function PengepulCard({ data }: { data: Pengepul }) {
   return (
     <Link 
@@ -11,11 +22,15 @@ export function PengepulCard({ data }: { data: Pengepul }) {
       {/* === BAGIAN GAMBAR === */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
         <Image
-          src={data.foto.depan}
+          src={getFotoUrl(data.foto?.depan)}  // ← PERBAIKAN DI SINI (data.foto.depan)
           alt={data.nama}
           fill
           sizes="25vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
+          onError={(e) => {
+            // Fallback otomatis kalau foto gagal load / URL rusak
+            (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+          }}
         />
         
         {/* Badge RT */}

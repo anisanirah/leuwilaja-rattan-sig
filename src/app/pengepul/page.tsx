@@ -99,7 +99,7 @@ export default function PengepulPage() {
           {pengepulList.length === 0 ? (
             <p className="text-center text-gray-500">Belum ada data pengepul.</p>
           ) : (
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
               {pengepulList.map((p) => (
                 <PengepulCard key={p.id} data={p} />
               ))}
